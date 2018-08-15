@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(name="customer")
+@Table(name="mst_customer")
 @EqualsAndHashCode(of = { "customerId" })
 public class Customer implements Serializable {
 

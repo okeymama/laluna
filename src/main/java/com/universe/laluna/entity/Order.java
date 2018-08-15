@@ -20,8 +20,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(name="order")
-@EqualsAndHashCode(of = { "orderId","customer.customerId" })
+@Table(name="mst_order")
+@EqualsAndHashCode(of = { "orderId" })
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
