@@ -22,16 +22,12 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepo customerRepo;
 	
-	public CustomerDto getCustomer(Long customerId) {
+	public CustomerDto getCustomer(Long customerId) throws Exception {
 			OrderDto orderDto = null;
 			CustomerDto customerDto = null;
 			List<OrderDto> orderDtoList = null;
 			Customer customer = null;
-			try {
-				customer = customerRepo.findById(customerId).orElseThrow(Exception :: new);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			customer = customerRepo.findById(customerId).orElseThrow(Exception :: new);
 			if(null != customer) {
 				customerDto = new CustomerDto();
 				BeanUtils.copyProperties(customer, customerDto);
