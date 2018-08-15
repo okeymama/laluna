@@ -16,10 +16,12 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name="order")
+@EqualsAndHashCode(of = { "orderId","customer.customerId" })
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,5 +41,6 @@ public class Order implements Serializable {
     @JoinColumn(name = "cust_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
+    
     
 }

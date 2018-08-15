@@ -22,15 +22,15 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	 @GetMapping("/getCustomerDetail/{customerId}")
-	 public @ResponseBody ResponseEntity<Customer> getCustomer(@PathVariable Long customerId){
-		 Customer customer = customerService.getCustomer(customerId);
-		 return ResponseEntity.ok(customer);
+	 public @ResponseBody ResponseEntity<CustomerDto> getCustomer(@PathVariable Long customerId){
+		 CustomerDto customerDto = customerService.getCustomer(customerId);
+		 return ResponseEntity.ok(customerDto);
 	 }
 	 
 	 @PostMapping("/saveCustomerDetail")
-	 public @ResponseBody ResponseEntity<Customer> saveCustomer(@RequestBody CustomerDto customerDto){
-		 Customer customerEntity = customerService.saveCustomer(customerDto);
-		 return ResponseEntity.ok(customerEntity);
+	 public @ResponseBody String saveCustomer(@RequestBody CustomerDto customerDto){
+		 customerService.saveCustomer(customerDto);
+		 return "Success";
 	 }
 	 
 	      

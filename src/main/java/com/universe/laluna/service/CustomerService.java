@@ -1,6 +1,8 @@
 package com.universe.laluna.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
@@ -20,13 +22,30 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepo customerRepo;
 	
-	public Customer getCustomer(Long customerId) {
-		try {
-			return customerRepo.findById(customerId).orElseThrow(Exception :: new);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public CustomerDto getCustomer(Long customerId) {
+			OrderDto orderDto = null;
+			CustomerDto customerDto = null;
+			List<OrderDto> orderDtoList = null;
+			Customer customer = null;
+			try {
+				customer = customerRepo.findById(customerId).orElseThrow(Exception :: new);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(null != customer) {
+				customerDto = new CustomerDto();
+				BeanUtils.copyProperties(customer, customerDto);
+				if(!CollectionUtils.isEmpty(customer.getOrder())) {
+					orderDtoList = new ArrayList<>();
+					for(Order order: customer.getOrder()) {
+						orderDto = new OrderDto();
+						BeanUtils.copyProperties(order, orderDto);
+						orderDtoList.add(orderDto);
+					}
+					customerDto.setOrderDto(orderDtoList);
+				}
+			}
+		return customerDto;
 	}
 
 	public Customer saveCustomer(CustomerDto customerDto) {
@@ -45,6 +64,11 @@ public class CustomerService {
 			customer.setOrder(orderSet);
 		}
 		return customerRepo.save(customer);
+	}
+	
+	
+	public void copyEntityListToDTOList() {
+		
 	}
 
 }
