@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class CustomerDto {
 
-	private List<OrderDto> order;
+	private List<OrderDto> orderDto;
     
     private Long customerId;
 

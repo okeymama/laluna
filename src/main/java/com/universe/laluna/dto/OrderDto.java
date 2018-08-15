@@ -10,7 +10,5 @@ public class OrderDto {
     private String orderType;
 
     private String paymentType;
-    
-    private CustomerDto customer;
-    	
+        	
 }
