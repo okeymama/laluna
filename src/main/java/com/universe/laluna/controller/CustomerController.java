@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.universe.laluna.dto.CustomerDto;
-import com.universe.laluna.entity.Customer;
 import com.universe.laluna.service.CustomerService;
 
 @RestController
