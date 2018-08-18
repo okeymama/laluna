@@ -24,7 +24,7 @@ public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer", orphanRemoval = true)
     private Set<Order> order;
     
     @Id

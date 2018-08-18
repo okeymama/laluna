@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.universe.laluna.dto.CustomerDto;
@@ -16,6 +17,7 @@ import com.universe.laluna.entity.Customer;
 import com.universe.laluna.entity.Order;
 import com.universe.laluna.repository.CustomerRepo;
 
+@Transactional
 @Service
 public class CustomerService {
 
@@ -23,7 +25,6 @@ public class CustomerService {
 	private CustomerRepo customerRepo;
 	
 	public CustomerDto getCustomer(Long customerId) throws Exception {
-			OrderDto orderDto = null;
 			CustomerDto customerDto = null;
 			List<OrderDto> orderDtoList = null;
 			Customer customer = null;
@@ -31,15 +32,8 @@ public class CustomerService {
 			if(null != customer) {
 				customerDto = new CustomerDto();
 				BeanUtils.copyProperties(customer, customerDto);
-				if(!CollectionUtils.isEmpty(customer.getOrder())) {
-					orderDtoList = new ArrayList<>();
-					for(Order order: customer.getOrder()) {
-						orderDto = new OrderDto();
-						BeanUtils.copyProperties(order, orderDto);
-						orderDtoList.add(orderDto);
-					}
-					customerDto.setOrderDto(orderDtoList);
-				}
+				orderDtoList = copyEntityListToDTOList(customer.getOrder(),new OrderDto(),OrderDto.class);
+				customerDto.setOrderDto(orderDtoList);
 			}
 		return customerDto;
 	}
@@ -63,8 +57,18 @@ public class CustomerService {
 	}
 	
 	
-	public void copyEntityListToDTOList() {
-		
+	@SuppressWarnings("unchecked")
+	public <T> List<T> copyEntityListToDTOList(Set set,T object,Class clazz) throws InstantiationException, IllegalAccessException {
+		List<T> dtoList = null;
+		if(!CollectionUtils.isEmpty(set)) {
+			dtoList = new ArrayList<>();
+			for(Object srcObj : set) {
+				Object dtoBean = clazz.newInstance();
+				BeanUtils.copyProperties(srcObj, dtoBean);
+				dtoList.add((T)dtoBean);
+			}
+		}
+		return dtoList;
 	}
 
 }
