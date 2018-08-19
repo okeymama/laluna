@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -23,6 +25,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepo customerRepo;
 	
+	@Cacheable(value = "customers", key = "#customerId")
 	public CustomerDto getCustomer(Long customerId) throws Exception {
 			CustomerDto customerDto = null;
 			List<OrderDto> orderDtoList = null;
@@ -37,6 +40,7 @@ public class CustomerService {
 		return customerDto;
 	}
 
+	//@CachePut(value = "customerDto", key = "#customerDto.customerId")
 	public Customer saveCustomer(CustomerDto customerDto) {
 		Customer customer = new Customer();
 		Order order = null;
