@@ -1,13 +1,18 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url : jdbc:postgresql://localhost:5433/postgres
-    username: postgres
-    password: password
+    url : $(JDBC_DATABASE_URL)
+    username: $(JDBC_DATABASE_USERNAME)
+    password: $(JDBC_DATABASE_PASSWORD)
     initialization-mode: NEVER
-  cache.type  : redis
-  redis.host : localhost
-  redis.port : 6379
+#    driver-class-name: org.postgresql.Driver
+#    url : jdbc:postgresql://localhost:5433/postgres
+#    username: postgres
+#    password: postgres
+#    initialization-mode: NEVER
+#  cache.type  : redis
+#  redis.host : localhost
+#  redis.port : 6379
   jpa:
     show-sql: true
     hibernate:
