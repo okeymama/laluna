@@ -8,7 +8,7 @@ spring:
 #  cache.type  : redis
 #  redis.host : localhost
 #  redis.port : 6379
-#  redis.url  : ${REDIS_URL}
+   redis.url  : ${REDIS_URL}
   jpa:
     show-sql: true
     hibernate:
