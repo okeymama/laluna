@@ -64,7 +64,7 @@ public class CustomerService {
 	}
 
 	public List<Long> getAllCustomerIds() {
-		return customerRepo.findCustomerId();
+		return customerRepo.getAllCustomerIds();
 	}
 	
 
