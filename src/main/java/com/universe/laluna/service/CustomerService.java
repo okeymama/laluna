@@ -18,6 +18,9 @@ import com.universe.laluna.entity.Order;
 import com.universe.laluna.repository.CustomerRepo;
 import com.universe.laluna.util.LalunaBeanUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Transactional
 @Service
 public class CustomerService {
@@ -27,6 +30,7 @@ public class CustomerService {
 	
 	@Cacheable(value = "customers", key = "#customerId")
 	public CustomerDto getCustomer(Long customerId) throws Exception {
+		log.info("Inside CustomerService.getCustomer: "+customerId);
 			CustomerDto customerDto = null;
 			List<OrderDto> orderDtoList = null;
 			Customer customer = null;

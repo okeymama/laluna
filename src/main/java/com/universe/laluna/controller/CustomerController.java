@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.universe.laluna.dto.CustomerDto;
 import com.universe.laluna.service.CustomerService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -22,6 +25,7 @@ public class CustomerController {
 	
 	 @GetMapping("/getCustomerDetail/{customerId}")
 	 public @ResponseBody ResponseEntity<CustomerDto> getCustomer(@PathVariable Long customerId) throws Exception{
+		 log.info("Inside CustomerService.getCustomer: "+customerId);
 		 CustomerDto customerDto = customerService.getCustomer(customerId);
 		 return ResponseEntity.ok(customerDto);
 	 }
