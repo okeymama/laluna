@@ -62,6 +62,10 @@ public class CustomerService {
 		}
 		return customerRepo.save(customer);
 	}
+
+	public List<Long> getAllCustomerIds() {
+		return customerRepo.findCustomerId();
+	}
 	
 
 }
