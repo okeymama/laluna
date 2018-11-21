@@ -9,10 +9,17 @@ spring:
 #  redis.host : localhost
 #  redis.port : 6379
   redis.url  : ${REDISCLOUD_URL}
+  redis.timeout: 10
+  redis:
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 1
+        max-active: 10
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create 
+      ddl-auto: update
     database: postgresql
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
