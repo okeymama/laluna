@@ -25,7 +25,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepo customerRepo;
 	
-	//@Cacheable(value = "customers", key = "#customerId")
+	@Cacheable(value = "customers", key = "#customerId")
 	public CustomerDto getCustomer(Long customerId) throws Exception {
 			CustomerDto customerDto = null;
 			List<OrderDto> orderDtoList = null;
