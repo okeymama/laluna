@@ -27,7 +27,7 @@ public class CustomerController {
 	
 	 @GetMapping("/getCustomerDetail/{customerId}")
 	 public @ResponseBody ResponseEntity<CustomerDto> getCustomer(@PathVariable Long customerId) throws Exception{
-		 log.info("Inside CustomerService.getCustomer: "+customerId);
+		 log.info("Inside CustomerController.getCustomer: "+customerId);
 		 CustomerDto customerDto = customerService.getCustomer(customerId);
 		 return ResponseEntity.ok(customerDto);
 	 }
@@ -40,7 +40,7 @@ public class CustomerController {
 	 
 	 @GetMapping("/getAllCustomerIds")
 	 public @ResponseBody ResponseEntity<List<Long>> getAllCustomerIds() throws Exception{
-		 log.info("Inside CustomerService.getAllCustomerIds: ");
+		 log.info("Inside CustomerController.getAllCustomerIds: ");
 		 List<Long> allCustomerIds = customerService.getAllCustomerIds();
 		 return ResponseEntity.ok(allCustomerIds);
 	 }   
